@@ -1,0 +1,242 @@
+/* ===== HEADER SCROLL ===== */
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+/* ===== BURGER MENU ===== */
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+
+burger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+/* ===== REVEAL ON SCROLL ===== */
+const revealEls = document.querySelectorAll(
+  '.style-card, .designer-card, .section-title, .section-sub, .section-label, .hero-stats'
+);
+
+revealEls.forEach(el => el.classList.add('reveal'));
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 60);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => observer.observe(el));
+
+/* ===== DESIGNERS SLIDER ===== */
+(function () {
+  const grid     = document.getElementById('designersGrid');
+  const prevBtn  = document.getElementById('sliderPrev');
+  const nextBtn  = document.getElementById('sliderNext');
+  const dotsWrap = document.getElementById('sliderDots');
+
+  if (!grid) return;
+
+  const cards = grid.querySelectorAll('.designer-card');
+  let current = 0;
+
+  function getVisible() {
+    if (window.innerWidth <= 640)  return 1;
+    if (window.innerWidth <= 1100) return 2;
+    return 3;
+  }
+
+  function totalSteps() {
+    return Math.ceil(cards.length / getVisible());
+  }
+
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    for (let i = 0; i < totalSteps(); i++) {
+      const dot = document.createElement('button');
+      dot.className = 'slider-dot' + (i === current ? ' active' : '');
+      dot.setAttribute('aria-label', 'Слайд ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    }
+  }
+
+  function goTo(index) {
+    const steps = totalSteps();
+    current = Math.max(0, Math.min(index, steps - 1));
+
+    const visible  = getVisible();
+    const cardW    = cards[0].getBoundingClientRect().width;
+    const gap      = 24;
+    const offset   = current * visible * (cardW + gap);
+    grid.style.transform = 'translateX(-' + offset + 'px)';
+
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current >= steps - 1;
+
+    dotsWrap.querySelectorAll('.slider-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  window.addEventListener('resize', () => {
+    current = 0;
+    buildDots();
+    goTo(0);
+  });
+
+  buildDots();
+  goTo(0);
+})();
+
+/* ===== STYLE CARD → PREFILL FORM ===== */
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.style-request');
+  if (!btn) return;
+
+  const val = btn.getAttribute('data-val');
+
+  // 1. Показываем цветной блок выбранного стиля
+  const selectedStyleBox  = document.getElementById('selectedStyleBox');
+  const selectedStyleName = document.getElementById('selectedStyleName');
+  selectedStyleName.textContent = val;
+  selectedStyleBox.style.display = 'flex';
+
+  // 2. Сохраняем стиль в скрытое поле
+  document.getElementById('styleSelect').value = val;
+
+  // 3. Сбрасываем кнопку "помогите определиться" если была нажата
+  const helpBtn = document.getElementById('btnHelpStyle');
+  if (helpBtn) {
+    helpBtn.classList.remove('active');
+    helpBtn.innerHTML = '✦ Помогите определиться';
+  }
+
+  // 4. Плавная прокрутка к форме
+  document.getElementById('request').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+/* ===== СБРОС ВЫБРАННОГО СТИЛЯ ===== */
+function clearSelectedStyle() {
+  document.getElementById('selectedStyleBox').style.display = 'none';
+  document.getElementById('selectedStyleName').textContent = '';
+  document.getElementById('styleSelect').value = '';
+  const helpBtn = document.getElementById('btnHelpStyle');
+  if (helpBtn) { helpBtn.classList.remove('active'); helpBtn.textContent = 'Помогите определиться'; }
+}
+
+/* ===== КНОПКА "ПОМОГИТЕ ОПРЕДЕЛИТЬСЯ" ===== */
+function setHelpStyle() {
+  const btn = document.getElementById('btnHelpStyle');
+  const styleSelect = document.getElementById('styleSelect');
+  const selectedStyleBox = document.getElementById('selectedStyleBox');
+
+  if (btn.classList.contains('active')) {
+    btn.classList.remove('active');
+    btn.innerHTML = '✦ Помогите определиться';
+    styleSelect.value = '';
+    selectedStyleBox.style.display = 'none';
+    document.getElementById('selectedStyleName').textContent = '';
+  } else {
+    btn.classList.add('active');
+    btn.innerHTML = '✓ Попросить помощь в выборе';
+    styleSelect.value = 'Помогите определиться';
+    // Скрываем блок с выбранным стилем из карточки если был
+    selectedStyleBox.style.display = 'none';
+    document.getElementById('selectedStyleName').textContent = '';
+  }
+}
+
+/* ===== TELEGRAM BOT ===== */
+const BOT_TOKEN = '8838987940:AAGJq26ceJj0i4WUOIMdT-YoXN8YCKpMhhE';
+const CHAT_ID   = '1184126051';
+
+async function sendToTelegram(data) {
+  // Используем простой текст без Markdown чтобы избежать ошибок парсинга
+  const text = [
+    '🎨 Новая заявка — Designers of Club',
+    '',
+    '🏢 Компания: ' + data.company,
+    '👤 Имя: ' + data.name,
+    '📧 Email: ' + data.email,
+    data.phone ? '📞 Телефон: ' + data.phone : '',
+    '🎨 Стиль: ' + data.style,
+    data.budget ? '💰 Бюджет: ' + data.budget : '',
+    '📝 Задача: ' + data.message,
+    data.telegram ? '✈️ Telegram клиента: ' + data.telegram : '',
+  ].filter(Boolean).join('\n');
+
+  const url = 'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage';
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: text,
+    }),
+  });
+
+  const json = await res.json();
+  if (!json.ok) throw new Error('Telegram: ' + json.description);
+}
+
+/* ===== FORM SUBMIT ===== */
+const requestForm = document.getElementById('requestForm');
+const submitBtn   = document.getElementById('submitBtn');
+const formSuccess = document.getElementById('formSuccess');
+
+requestForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const btnText = submitBtn.querySelector('.btn-text');
+  const origText = btnText.textContent;
+  submitBtn.classList.add('loading');
+  btnText.textContent = 'Отправляем...';
+
+  // Получаем стиль: из карточки, кнопки "помогите" или скрытого поля
+  const selectedStyleName = document.getElementById('selectedStyleName').textContent.trim();
+  const styleSelect = document.getElementById('styleSelect');
+  const styleValue = selectedStyleName || styleSelect.value || 'Не указан';
+
+  const data = {
+    company:  requestForm.querySelector('#company').value.trim(),
+    name:     requestForm.querySelector('#clientName').value.trim(),
+    email:    requestForm.querySelector('#email').value.trim(),
+    phone:    requestForm.querySelector('#phone').value.trim(),
+    style:    styleValue,
+    budget:   requestForm.querySelector('#budget').value,
+    message:  requestForm.querySelector('#message').value.trim(),
+    telegram: requestForm.querySelector('#clientTelegram').value.trim(),
+  };
+
+  try {
+    await sendToTelegram(data);
+    requestForm.classList.add('hidden-form');
+    formSuccess.classList.add('visible');
+    formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } catch (err) {
+    alert('Ошибка отправки. Напишите нам напрямую: @nastalllqp');
+    console.error(err);
+  } finally {
+    submitBtn.classList.remove('loading');
+    btnText.textContent = origText;
+  }
+});
+
+/* ===== RESET FORM ===== */
+function resetForm() {
+  requestForm.reset();
+  requestForm.classList.remove('hidden-form');
+  formSuccess.classList.remove('visible');
+  clearSelectedStyle();
+  document.getElementById('request').scrollIntoView({ behavior: 'smooth' });
+}
