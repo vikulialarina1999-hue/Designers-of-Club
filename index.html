@@ -455,66 +455,23 @@
       <div class="form-wrapper">
         <form class="request-form" id="requestForm">
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="company">Название компании *</label>
-              <input type="text" id="company" name="company" placeholder="Ваша компания" required />
-            </div>
-            <div class="form-group">
-              <label for="clientName">Ваше имя *</label>
-              <input type="text" id="clientName" name="clientName" placeholder="Иван Иванов" required />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="email">Email *</label>
-              <input type="email" id="email" name="email" placeholder="hello@company.com" required />
-            </div>
-            <div class="form-group">
-              <label for="phone">Телефон</label>
-              <input type="tel" id="phone" name="phone" placeholder="+7 999 000 00 00" />
-            </div>
+          <div class="form-group">
+            <label for="clientName">Ваше имя *</label>
+            <input type="text" id="clientName" name="clientName" placeholder="Иван Иванов" required />
           </div>
 
           <div class="form-group">
-            <label>Желаемый стиль дизайна</label>
-            <!-- Блок: выбранный стиль из карточки -->
-            <div class="selected-style-box" id="selectedStyleBox" style="display:none;">
-              <span class="selected-style-icon">🎨</span>
-              <span id="selectedStyleName"></span>
-              <button type="button" class="clear-style-btn" onclick="clearSelectedStyle()">✕</button>
-            </div>
-            <input type="hidden" id="styleSelect" name="styleSelect" value="" />
-            <button type="button" class="btn-help-style" id="btnHelpStyle" onclick="setHelpStyle()">
-              Помогите определиться
-            </button>
+            <label for="clientTelegram">Telegram или телефон для связи *</label>
+            <input type="text" id="clientTelegram" name="clientTelegram" placeholder="@username или +7 999 000 00 00" required />
           </div>
 
           <div class="form-group">
-            <label for="budget">Бюджет проекта</label>
-            <select id="budget" name="budget">
-              <option value="" disabled selected>Выберите диапазон</option>
-              <option>До 30 000 ₽</option>
-              <option>30 000 — 80 000 ₽</option>
-              <option>80 000 — 200 000 ₽</option>
-              <option>Более 200 000 ₽</option>
-              <option>Обсудим индивидуально</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="message">Описание задачи *</label>
-            <textarea id="message" name="message" placeholder="Расскажите о проекте: что нужно сделать, на какой платформе, есть ли референсы..." rows="4" required></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="clientTelegram">Ваш Telegram для связи</label>
-            <input type="text" id="clientTelegram" name="clientTelegram" placeholder="@username" />
+            <label for="message">Что нужно сделать? *</label>
+            <textarea id="message" name="message" placeholder="Опишите задачу в свободной форме — мы разберёмся и подберём дизайнера за 2 часа" rows="4" required></textarea>
           </div>
 
           <button type="submit" class="btn-submit" id="submitBtn">
-            <span class="btn-text">Отправить заявку</span>
+            <span class="btn-text">Оставить заявку</span>
             <span class="btn-arrow">→</span>
           </button>
 
