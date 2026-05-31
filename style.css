@@ -1072,27 +1072,27 @@ body {
   flex-shrink: 0;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px) and (min-width: 601px) {
   .how-grid { flex-direction: column; }
   .how-arrow { display: none; }
 }
 
 @media (max-width: 600px) {
   .how-grid {
-    flex-direction: row;
+    flex-direction: row !important;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     gap: 16px;
     padding-bottom: 16px;
-    /* убираем полосу прокрутки */
     scrollbar-width: none;
   }
   .how-grid::-webkit-scrollbar { display: none; }
 
   .how-card {
-    flex: 0 0 75vw;
+    flex: 0 0 78vw;
     scroll-snap-align: start;
+    min-width: 0;
   }
 
   .how-arrow { display: none; }
