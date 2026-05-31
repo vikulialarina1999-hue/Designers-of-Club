@@ -1297,6 +1297,64 @@ body {
   .stat-divider { display: none; }
   .hero-cta { flex-direction: column; align-items: flex-start; }
 
+  /* Pricing — компактный список */
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .pricing-card {
+    flex-direction: row;
+    align-items: center;
+    padding: 16px 20px;
+    gap: 0;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pricing-card:last-child {
+    border-bottom: none;
+  }
+
+  .pricing-card:hover {
+    transform: none;
+    box-shadow: none;
+    background: var(--bg-card2);
+  }
+
+  .pricing-num { display: none; }
+
+  .pricing-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    flex: 1;
+  }
+
+  .pricing-card p {
+    display: none;
+  }
+
+  .pricing-meta {
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 0;
+    border-top: none;
+    margin-top: 0;
+    gap: 2px;
+  }
+
+  .pricing-time {
+    font-size: 11px;
+  }
+
+  .pricing-price {
+    font-size: 17px;
+  }
+
   .styles-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
