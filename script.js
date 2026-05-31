@@ -1,3 +1,22 @@
+/* ===== PORTFOLIO SLIDESHOW ===== */
+document.addEventListener('DOMContentLoaded', function () {
+  const slides = Array.from(document.querySelectorAll('.portfolio-slide'));
+  const dots   = Array.from(document.querySelectorAll('.psdot'));
+  if (!slides.length) return;
+  let current = 0;
+
+  function show(index) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
+  setInterval(() => show(current + 1), 3000);
+});
+
 /* ===== HEADER SCROLL ===== */
 const header = document.getElementById('header');
 window.addEventListener('scroll', () => {
@@ -161,19 +180,13 @@ const BOT_TOKEN = '8838987940:AAGJq26ceJj0i4WUOIMdT-YoXN8YCKpMhhE';
 const CHAT_ID   = '1184126051';
 
 async function sendToTelegram(data) {
-  // Используем простой текст без Markdown чтобы избежать ошибок парсинга
   const text = [
     '🎨 Новая заявка — Designers of Club',
     '',
-    '🏢 Компания: ' + data.company,
     '👤 Имя: ' + data.name,
-    '📧 Email: ' + data.email,
-    data.phone ? '📞 Телефон: ' + data.phone : '',
-    '🎨 Стиль: ' + data.style,
-    data.budget ? '💰 Бюджет: ' + data.budget : '',
+    '✈️ Контакт: ' + data.telegram,
     '📝 Задача: ' + data.message,
-    data.telegram ? '✈️ Telegram клиента: ' + data.telegram : '',
-  ].filter(Boolean).join('\n');
+  ].join('\n');
 
   const url = 'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage';
   const res = await fetch(url, {
@@ -202,20 +215,10 @@ requestForm.addEventListener('submit', async (e) => {
   submitBtn.classList.add('loading');
   btnText.textContent = 'Отправляем...';
 
-  // Получаем стиль: из карточки, кнопки "помогите" или скрытого поля
-  const selectedStyleName = document.getElementById('selectedStyleName').textContent.trim();
-  const styleSelect = document.getElementById('styleSelect');
-  const styleValue = selectedStyleName || styleSelect.value || 'Не указан';
-
   const data = {
-    company:  requestForm.querySelector('#company').value.trim(),
     name:     requestForm.querySelector('#clientName').value.trim(),
-    email:    requestForm.querySelector('#email').value.trim(),
-    phone:    requestForm.querySelector('#phone').value.trim(),
-    style:    styleValue,
-    budget:   requestForm.querySelector('#budget').value,
-    message:  requestForm.querySelector('#message').value.trim(),
     telegram: requestForm.querySelector('#clientTelegram').value.trim(),
+    message:  requestForm.querySelector('#message').value.trim(),
   };
 
   try {
