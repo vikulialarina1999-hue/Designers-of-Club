@@ -1077,6 +1077,27 @@ body {
   .how-arrow { display: none; }
 }
 
+@media (max-width: 600px) {
+  .how-grid {
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding-bottom: 16px;
+    /* убираем полосу прокрутки */
+    scrollbar-width: none;
+  }
+  .how-grid::-webkit-scrollbar { display: none; }
+
+  .how-card {
+    flex: 0 0 75vw;
+    scroll-snap-align: start;
+  }
+
+  .how-arrow { display: none; }
+}
+
 /* ===== PRICING ===== */
 .pricing-section { padding: 120px 0; }
 
