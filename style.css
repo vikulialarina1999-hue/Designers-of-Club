@@ -1297,6 +1297,15 @@ body {
   .stat-divider { display: none; }
   .hero-cta { flex-direction: column; align-items: flex-start; }
 
+  /* Portfolio — мобилка */
+  .portfolio-desc {
+    display: none;
+  }
+
+  .portfolio-info {
+    padding: 20px;
+  }
+
   /* Pricing — компактный список */
   .pricing-grid {
     grid-template-columns: 1fr;
