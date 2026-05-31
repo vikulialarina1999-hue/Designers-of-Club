@@ -1072,30 +1072,61 @@ body {
   flex-shrink: 0;
 }
 
-@media (max-width: 900px) and (min-width: 601px) {
+@media (max-width: 900px) {
   .how-grid { flex-direction: column; }
   .how-arrow { display: none; }
 }
 
 @media (max-width: 600px) {
   .how-grid {
-    flex-direction: row !important;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 16px;
-    padding-bottom: 16px;
-    scrollbar-width: none;
+    flex-direction: column;
+    position: relative;
+    padding-left: 40px;
+    gap: 0;
   }
-  .how-grid::-webkit-scrollbar { display: none; }
+
+  .how-grid::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    bottom: 20px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent), var(--accent2));
+    opacity: 0.4;
+    border-radius: 2px;
+  }
 
   .how-card {
-    flex: 0 0 78vw;
-    scroll-snap-align: start;
-    min-width: 0;
+    position: relative;
+    padding: 20px 20px 32px 20px;
+    background: none;
+    border: none;
+    box-shadow: none;
   }
 
-  .how-arrow { display: none; }
+  .how-card::before {
+    content: attr(data-num);
+    position: absolute;
+    left: -40px;
+    top: 18px;
+    width: 30px;
+    height: 30px;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent2);
+    line-height: 1;
+    text-align: center;
+    padding-top: 1px;
+  }
+
+  .how-num { display: none; }
 }
 
 /* ===== PRICING ===== */
