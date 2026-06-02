@@ -1,5 +1,5 @@
 /* ===== LANGUAGE SWITCHER ===== */
-document.addEventListener('DOMContentLoaded', function () {
+(function () {
   const btn = document.getElementById('langSwitcher');
   if (!btn) return;
   let lang = 'en';
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   applyLang('en');
-});
+})();
 
 /* ===== PORTFOLIO SLIDESHOW ===== */
 document.addEventListener('DOMContentLoaded', function () {
