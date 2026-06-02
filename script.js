@@ -1,3 +1,28 @@
+/* ===== LANGUAGE SWITCHER ===== */
+document.addEventListener('DOMContentLoaded', function () {
+  const btn = document.getElementById('langSwitcher');
+  if (!btn) return;
+  let lang = 'en';
+
+  function applyLang(l) {
+    document.querySelectorAll('[data-ru]').forEach(el => {
+      el.textContent = l === 'ru' ? el.getAttribute('data-ru') : el.getAttribute('data-en');
+    });
+    document.querySelectorAll('[data-ru-placeholder]').forEach(el => {
+      el.placeholder = l === 'ru' ? el.getAttribute('data-ru-placeholder') : el.getAttribute('data-en-placeholder');
+    });
+    document.documentElement.lang = l;
+    btn.textContent = l === 'ru' ? 'EN' : 'RU';
+  }
+
+  btn.addEventListener('click', () => {
+    lang = lang === 'ru' ? 'en' : 'ru';
+    applyLang(lang);
+  });
+
+  applyLang('en');
+});
+
 /* ===== PORTFOLIO SLIDESHOW ===== */
 document.addEventListener('DOMContentLoaded', function () {
   const slides = Array.from(document.querySelectorAll('.portfolio-slide'));
