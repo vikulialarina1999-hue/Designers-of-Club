@@ -445,41 +445,87 @@
       <h2 class="section-title"><span data-ru="Наши" data-en="Our">Наши</span><br/><span class="gradient-text" data-ru="работы" data-en="works">работы</span></h2>
       <p class="section-sub" data-ru="Реальные проекты — от идеи до готового результата" data-en="Real projects — from idea to finished result">Реальные проекты — от идеи до готового результата</p>
 
-      <div class="portfolio-grid">
+      <div class="portfolio-slider-wrap">
+        <button class="portfolio-arrow portfolio-arrow-prev" id="portfolioArrowPrev" aria-label="Предыдущий проект">&#8592;</button>
 
-        <div class="portfolio-card">
-          <div class="portfolio-preview">
-            <div class="portfolio-slides">
-              <img src="portfolio-1.png" class="portfolio-slide active" alt="Главная страница" />
-              <img src="portfolio-2.png" class="portfolio-slide" alt="Каталог игр" />
-              <img src="portfolio-3.png" class="portfolio-slide" alt="Демо игры" />
-              <img src="portfolio-4.png" class="portfolio-slide" alt="Преимущества" />
+        <div class="portfolio-slider" id="portfolioSlider">
+
+          <!-- ПРОЕКТ 1: Детские игры -->
+          <div class="portfolio-card">
+            <div class="portfolio-preview">
+              <div class="portfolio-slides">
+                <img src="portfolio-1.png" class="portfolio-slide active" alt="Главная страница" />
+                <img src="portfolio-2.png" class="portfolio-slide" alt="Каталог игр" />
+                <img src="portfolio-3.png" class="portfolio-slide" alt="Демо игры" />
+                <img src="portfolio-4.png" class="portfolio-slide" alt="Преимущества" />
+              </div>
+              <div class="portfolio-slide-dots">
+                <span class="psdot active"></span>
+                <span class="psdot"></span>
+                <span class="psdot"></span>
+                <span class="psdot"></span>
+              </div>
             </div>
-            <div class="portfolio-slide-dots">
-              <span class="psdot active"></span>
-              <span class="psdot"></span>
-              <span class="psdot"></span>
-              <span class="psdot"></span>
+            <div class="portfolio-info">
+              <div class="portfolio-tags">
+                <span class="ptag" data-ru="Веб-дизайн" data-en="Web design">Веб-дизайн</span>
+                <span class="ptag" data-ru="Разработка" data-en="Development">Разработка</span>
+                <span class="ptag" data-ru="Геймификация" data-en="Gamification">Геймификация</span>
+              </div>
+              <h3 class="portfolio-title" data-ru="Сайт персонализированных детских игр" data-en="Personalized children's games website">Сайт персонализированных детских игр</h3>
+              <p class="portfolio-desc" data-ru="Яркий сказочный сайт с тремя интерактивными мини-играми на Canvas. Ребёнок вводит имя — и становится героем игры. Акварельный стиль, анимированные облака и деревья, форма заказа через Telegram-бот." data-en="A bright fairy-tale website with three interactive mini-games on Canvas. The child enters their name and becomes the game hero. Watercolor style, animated clouds and trees, order form via Telegram bot.">Яркий сказочный сайт с тремя интерактивными мини-играми на Canvas. Ребёнок вводит имя — и становится героем игры. Акварельный стиль, анимированные облака и деревья, форма заказа через Telegram-бот.</p>
+              <ul class="portfolio-features">
+                <li data-ru="3 браузерных игры: космос, платформер, динозавр" data-en="3 browser games: space, platformer, dinosaur">3 браузерных игры: космос, платформер, динозавр</li>
+                <li data-ru="Персонализация — имя ребёнка в игре" data-en="Personalization — child's name in the game">Персонализация — имя ребёнка в игре</li>
+                <li data-ru="Приём заказов через Telegram" data-en="Order processing via Telegram">Приём заказов через Telegram</li>
+                <li data-ru="Анимированный сказочный фон" data-en="Animated fairy-tale background">Анимированный сказочный фон</li>
+              </ul>
             </div>
           </div>
-          <div class="portfolio-info">
-            <div class="portfolio-tags">
-              <span class="ptag" data-ru="Веб-дизайн" data-en="Web design">Веб-дизайн</span>
-              <span class="ptag" data-ru="Разработка" data-en="Development">Разработка</span>
-              <span class="ptag" data-ru="Геймификация" data-en="Gamification">Геймификация</span>
+
+          <!-- ПРОЕКТ 2: Georgia Wild -->
+          <div class="portfolio-card">
+            <div class="portfolio-preview">
+              <div class="portfolio-slides portfolio-slides-2">
+                <img src="portfolio-5.jpg" class="portfolio-slide-2 active" alt="Georgia Wild — главная" />
+                <img src="portfolio-6.jpg" class="portfolio-slide-2" alt="Georgia Wild — туры" />
+                <img src="portfolio-7.jpg" class="portfolio-slide-2" alt="Georgia Wild — трансфер" />
+                <img src="portfolio-8.jpg" class="portfolio-slide-2" alt="Georgia Wild — галерея" />
+                <img src="portfolio-9.jpg" class="portfolio-slide-2" alt="Georgia Wild — отзывы" />
+              </div>
+              <div class="portfolio-slide-dots portfolio-slide-dots-2">
+                <span class="psdot2 active"></span>
+                <span class="psdot2"></span>
+                <span class="psdot2"></span>
+                <span class="psdot2"></span>
+                <span class="psdot2"></span>
+              </div>
             </div>
-            <h3 class="portfolio-title" data-ru="Сайт персонализированных детских игр" data-en="Personalized children's games website">Сайт персонализированных детских игр</h3>
-            <p class="portfolio-desc" data-ru="Яркий сказочный сайт с тремя интерактивными мини-играми на Canvas. Ребёнок вводит имя — и становится героем игры. Акварельный стиль, анимированные облака и деревья, форма заказа через Telegram-бот." data-en="A bright fairy-tale website with three interactive mini-games on Canvas. The child enters their name and becomes the game hero. Watercolor style, animated clouds and trees, order form via Telegram bot.">Яркий сказочный сайт с тремя интерактивными мини-играми на Canvas. Ребёнок вводит имя — и становится героем игры. Акварельный стиль, анимированные облака и деревья, форма заказа через Telegram-бот.</p>
-            <ul class="portfolio-features">
-              <li data-ru="3 браузерных игры: космос, платформер, динозавр" data-en="3 browser games: space, platformer, dinosaur">3 браузерных игры: космос, платформер, динозавр</li>
-              <li data-ru="Персонализация — имя ребёнка в игре" data-en="Personalization — child's name in the game">Персонализация — имя ребёнка в игре</li>
-              <li data-ru="Приём заказов через Telegram" data-en="Order processing via Telegram">Приём заказов через Telegram</li>
-              <li data-ru="Анимированный сказочный фон" data-en="Animated fairy-tale background">Анимированный сказочный фон</li>
-            </ul>
+            <div class="portfolio-info">
+              <div class="portfolio-tags">
+                <span class="ptag" data-ru="Веб-дизайн" data-en="Web design">Веб-дизайн</span>
+                <span class="ptag" data-ru="Туризм" data-en="Tourism">Туризм</span>
+                <span class="ptag" data-ru="Разработка" data-en="Development">Разработка</span>
+              </div>
+              <h3 class="portfolio-title" data-ru="Сайт туристического агентства Georgia Wild" data-en="Georgia Wild — tourism agency website">Сайт туристического агентства Georgia Wild</h3>
+              <p class="portfolio-desc" data-ru="Элегантный сайт для туристического агентства по Грузии. Тёмная шапка с горными пейзажами, каталог туров с ценами, раздел трансфера, галерея и форма бронирования. Заявки приходят в WhatsApp и Telegram." data-en="An elegant website for a Georgia tourism agency. Dark hero with mountain landscapes, tour catalogue with prices, transfer section, gallery and booking form. Requests arrive via WhatsApp and Telegram.">Элегантный сайт для туристического агентства по Грузии. Тёмная шапка с горными пейзажами, каталог туров с ценами, раздел трансфера, галерея и форма бронирования. Заявки приходят в WhatsApp и Telegram.</p>
+              <ul class="portfolio-features">
+                <li data-ru="6 туров с описанием, ценами и кнопкой бронирования" data-en="6 tours with descriptions, prices and booking button">6 туров с описанием, ценами и кнопкой бронирования</li>
+                <li data-ru="Раздел трансфера с маршрутами и расстояниями" data-en="Transfer section with routes and distances">Раздел трансфера с маршрутами и расстояниями</li>
+                <li data-ru="Галерея пейзажей Грузии" data-en="Gallery of Georgian landscapes">Галерея пейзажей Грузии</li>
+                <li data-ru="Форма заявки с отправкой в Telegram" data-en="Request form with Telegram delivery">Форма заявки с отправкой в Telegram</li>
+              </ul>
+            </div>
           </div>
+
         </div>
 
+        <button class="portfolio-arrow portfolio-arrow-next" id="portfolioArrowNext" aria-label="Следующий проект">&#8594;</button>
+      </div>
 
+      <div class="portfolio-project-dots" id="portfolioProjectDots">
+        <span class="pp-dot active"></span>
+        <span class="pp-dot"></span>
       </div>
 
       <p class="portfolio-note"><span data-ru="Хотите стать нашим следующим кейсом?" data-en="Want to be our next case study?">Хотите стать нашим следующим кейсом?</span> <a href="#request" class="portfolio-link" data-ru="Оставьте заявку →" data-en="Leave a request →">Оставьте заявку →</a></p>
