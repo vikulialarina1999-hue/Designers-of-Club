@@ -23,68 +23,6 @@
   applyLang('en');
 })();
 
-/* ===== PORTFOLIO SLIDESHOW + PROJECT SWITCHER ===== */
-document.addEventListener('DOMContentLoaded', function () {
-
-  /* --- Слайдшоу картинок внутри каждого проекта --- */
-  function initSlideshow(slideClass, dotClass) {
-    const slides = Array.from(document.querySelectorAll('.' + slideClass));
-    const dots   = Array.from(document.querySelectorAll('.' + dotClass));
-    if (!slides.length) return;
-    let current = 0;
-    function show(index) {
-      slides[current].classList.remove('active');
-      if (dots[current]) dots[current].classList.remove('active');
-      current = (index + slides.length) % slides.length;
-      slides[current].classList.add('active');
-      if (dots[current]) dots[current].classList.add('active');
-    }
-    dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
-    setInterval(() => show(current + 1), 3000);
-  }
-
-  initSlideshow('portfolio-slide', 'psdot');
-  initSlideshow('portfolio-slide-2', 'psdot2');
-
-  /* --- Переключение между проектами стрелками --- */
-  const slider    = document.getElementById('portfolioSlider');
-  const prevBtn   = document.getElementById('portfolioArrowPrev');
-  const nextBtn   = document.getElementById('portfolioArrowNext');
-  const dotsWrap  = document.getElementById('portfolioProjectDots');
-
-  if (!slider || !prevBtn || !nextBtn) return;
-
-  const cards = Array.from(slider.querySelectorAll('.portfolio-card'));
-  const total = cards.length;
-  let current = 0;
-
-  function goToProject(index) {
-    current = Math.max(0, Math.min(index, total - 1));
-
-    cards.forEach((card, i) => {
-      card.style.display = i === current ? '' : 'none';
-    });
-
-    prevBtn.disabled = current === 0;
-    nextBtn.disabled = current === total - 1;
-
-    const dots = dotsWrap ? dotsWrap.querySelectorAll('.pp-dot') : [];
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
-  }
-
-  /* Клик по точкам */
-  if (dotsWrap) {
-    dotsWrap.querySelectorAll('.pp-dot').forEach((dot, i) => {
-      dot.addEventListener('click', () => goToProject(i));
-    });
-  }
-
-  prevBtn.addEventListener('click', () => goToProject(current - 1));
-  nextBtn.addEventListener('click', () => goToProject(current + 1));
-
-  goToProject(0);
-});
-
 /* ===== HEADER SCROLL ===== */
 const header = document.getElementById('header');
 window.addEventListener('scroll', () => {
